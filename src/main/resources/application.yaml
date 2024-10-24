@@ -11,3 +11,8 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+
+app:
+  home:
+    products-per-page: 10
+    number-of-best-selling-products: 5
