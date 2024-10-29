@@ -1,4 +1,4 @@
-package com.xdavide9.demo.services;
+package com.xdavide9.demo.web.home;
 
 import com.xdavide9.demo.jpa.entities.product.Product;
 import com.xdavide9.demo.jpa.repositories.product.ProductRepository;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ProductService {
+public class HomeService {
     private final ProductRepository productRepository;
 
     public Page<Product> getProductsOfPage(int pageNumber, int pageSize) {

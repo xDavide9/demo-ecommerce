@@ -11,8 +11,12 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+    locations:
+      - classpath:db/migrations/schema
+      - classpath:db/migrations/data
 
 app:
   home:
     products-per-page: 10
     number-of-best-selling-products: 5
+

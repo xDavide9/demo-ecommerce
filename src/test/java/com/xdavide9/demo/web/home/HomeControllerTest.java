@@ -1,18 +1,16 @@
-package com.xdavide9.demo.controllers.home;
+package com.xdavide9.demo.web.home;
 
 import com.xdavide9.demo.jpa.entities.product.Product;
 import com.xdavide9.demo.properties.HomeProperties;
-import com.xdavide9.demo.services.ProductService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -24,12 +22,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(HomeController.class)
+@ActiveProfiles("test")
 class HomeControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private ProductService productService;
+    private HomeService homeService;
     @MockBean
     private HomeProperties homeProperties;
 
@@ -48,8 +47,8 @@ class HomeControllerTest {
     void itShouldReturnHomeDefaultPage() throws Exception {
         List<Product> products = new ArrayList<>();
         Page<Product> page = new PageImpl<>(products, PageRequest.of(0, productsPerPage), totalProducts);
-        when(productService.getProductsOfPage(0, productsPerPage)).thenReturn(page);
-        when(productService.getBestSellingProducts(numberOfBestSellingProducts)).thenReturn(products);
+        when(homeService.getProductsOfPage(0, productsPerPage)).thenReturn(page);
+        when(homeService.getBestSellingProducts(numberOfBestSellingProducts)).thenReturn(products);
         mockMvc.perform(MockMvcRequestBuilders.get("/home"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("currentPage", 1))
@@ -62,8 +61,8 @@ class HomeControllerTest {
     void itShouldReturnHomeSomePage() throws Exception {
         List<Product> products = new ArrayList<>();
         Page<Product> page = new PageImpl<>(products, PageRequest.of(2, productsPerPage), totalProducts);
-        when(productService.getProductsOfPage(2, productsPerPage)).thenReturn(page);
-        when(productService.getBestSellingProducts(numberOfBestSellingProducts)).thenReturn(products);
+        when(homeService.getProductsOfPage(2, productsPerPage)).thenReturn(page);
+        when(homeService.getBestSellingProducts(numberOfBestSellingProducts)).thenReturn(products);
         mockMvc.perform(MockMvcRequestBuilders.get("/home?page=3"))
                 .andExpect(status().isOk())
                 .andExpect(model().attribute("currentPage", 3))

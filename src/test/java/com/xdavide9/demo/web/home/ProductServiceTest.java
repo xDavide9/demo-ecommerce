@@ -1,4 +1,4 @@
-package com.xdavide9.demo.services;
+package com.xdavide9.demo.web.home;
 
 import com.xdavide9.demo.jpa.entities.product.Product;
 import com.xdavide9.demo.jpa.repositories.product.ProductRepository;
@@ -19,14 +19,14 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ProductServiceTest {
 
-    private ProductService underTest;
+    private HomeService underTest;
 
     @Mock
     private ProductRepository productRepository;
 
     @BeforeEach
     void setUp() {
-        underTest = new ProductService(productRepository);
+        underTest = new HomeService(productRepository);
     }
 
     @Test
