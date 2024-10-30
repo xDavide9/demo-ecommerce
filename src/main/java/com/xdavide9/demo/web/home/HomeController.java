@@ -27,4 +27,9 @@ public class HomeController {
         model.addAttribute("bestSellingProducts", homeService.getBestSellingProducts(numberOfBestSellingProducts));
         return "home";
     }
+
+    @GetMapping("/")
+    public String redirectHome() {
+        return "redirect:/home";
+    }
 }
