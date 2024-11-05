@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @Table(
         name = "product"
 )
+@Builder
 public class Product {
     @Id
     @SequenceGenerator(
@@ -62,4 +63,6 @@ public class Product {
             scale = 2
     )
     private BigDecimal price;
+
+
 }

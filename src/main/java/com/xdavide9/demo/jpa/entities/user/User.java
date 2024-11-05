@@ -46,6 +46,7 @@ import java.time.LocalDate;
                 )
         }
 )
+@Builder
 public class User {
     @Id
     @SequenceGenerator(
@@ -104,14 +105,14 @@ public class User {
     )
     private String country;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = RoleConverter.class)
     @Column(
             name = "role",
             nullable = false
     )
     private Role role;
 
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = GenderConverter.class)
     @Column(
             name = "gender"
     )

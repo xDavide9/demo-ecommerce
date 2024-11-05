@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.ERROR).permitAll()
                         .requestMatchers("/static/**", "/template/**").permitAll()
                         .requestMatchers("/home").permitAll()
+                        .requestMatchers("/cart").authenticated()
                         .anyRequest().denyAll()
                 ).userDetailsService(userDetailsService)
                 .build();

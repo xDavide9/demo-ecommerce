@@ -1,0 +1,8 @@
+<h3>Cart</h3>
+<ul>
+    <li th:each="cartProduct : ${cartProducts}">
+        <span th:text="${cartProduct.product.name}"></span>
+        <span th:text="${cartProduct.product.price}"></span>
+        <p th:text="${cartProduct.product.description}"></p>
+    </li>
+</ul>
