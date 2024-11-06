@@ -71,7 +71,7 @@ class CartProductRepositoryTest {
         CartProduct cp2 = new CartProduct(new CartProductId(userId, productId2), u1, p2, 5);
         underTest.saveAll(List.of(cp1, cp2));
         // when
-        List<CartProduct> allByUser = underTest.findAllByUser(u1);
+        List<CartProduct> allByUser = underTest.findAllByUser(u1.getEmail());
         // then
         assertThat(allByUser)
                 .hasSize(2)

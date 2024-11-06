@@ -37,15 +37,18 @@ class SecurityConfigTest {
     @Test
     @WithAnonymousUser
     void itShouldAllowRequestsToHomeRedirect() throws Exception {
-        mockMvc.perform(get("/")).andExpect(status().is3xxRedirection());
+        mockMvc.perform(get("/"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().string("Location", "/home"));
     }
 
     @Test
+    @WithAnonymousUser
     void itShouldDenyRequestsToCartIfNotAuthenticated() throws Exception {
-        mockMvc.perform(get("/cart")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/cart"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(header().string("Location", "http://localhost/login"));
     }
-
-    // todo fix this last test
 
     @Test
     @WithMockUser
